@@ -47,7 +47,7 @@ jobs:
         run: pnpm typecheck
 
       - name: Build
-        run: pnpm build
+        run: VITE_BASE=/alpine-book/ pnpm build
 
       - name: Conferir o build
         run: |
