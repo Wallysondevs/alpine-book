@@ -1,0 +1,60 @@
+# Roda typecheck e build em pull request e em branch que nao seja o main.
+# Serve para o erro aparecer antes de virar publicacao.
+name: Verificar
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches-ignore: [main, gh-pages]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verificar-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Baixar o codigo
+        uses: actions/checkout@v4
+
+      - name: Instalar o pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.9
+
+      - name: Instalar o Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Instalar as dependencias
+        run: pnpm install --frozen-lockfile
+
+      - name: Checar os tipos
+        run: pnpm typecheck
+
+      - name: Build
+        run: pnpm build
+
+      - name: Conferir rotas, licoes e menu
+        run: |
+          set -euo pipefail
+          ROTAS=$(grep -c '<Route' src/App.tsx)
+          LICOES=$(grep -c 'path: "/' src/lib/course.ts)
+          MENU=$(grep -c 'path: "/' src/components/layout/Sidebar.tsx || true)
+          echo "rotas=$ROTAS licoes=$LICOES menu=$MENU"
+          echo "| item | quantidade |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| --- | --- |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| rotas em App.tsx | $ROTAS |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| licoes em course.ts | $LICOES |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| itens de menu | $MENU |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| tamanho do dist | $(du -sh dist | cut -f1) |" >> "$GITHUB_STEP_SUMMARY"
