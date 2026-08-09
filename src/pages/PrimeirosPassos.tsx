@@ -66,7 +66,7 @@ free -m`}
       <Terminal
         title="Primeira atualização completa"
         lines={[
-          { type: "in", text: "apk update" },
+          { type: "cmd", text: "apk update" },
           {
             type: "out",
             text: "fetch https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/APKINDEX.tar.gz",
@@ -76,7 +76,7 @@ free -m`}
             text: "v3.24-1-g12345678 [https://dl-cdn.alpinelinux.org/alpine/v3.24/main]",
           },
           { type: "ok", text: "# índices sincronizados" },
-          { type: "in", text: "apk upgrade" },
+          { type: "cmd", text: "apk upgrade" },
           {
             type: "out",
             text: "(1/3) Upgrading alpine-base (3.24.1-r0 -> 3.24.2-r0)",
@@ -108,9 +108,9 @@ free -m`}
       <Terminal
         title="Habilitando o community"
         lines={[
-          { type: "in", text: "setup-apkrepos" },
+          { type: "cmd", text: "setup-apkrepos" },
           { type: "out", text: "Selecione o mirror (ou Enter para o padrão):" },
-          { type: "in", text: "1  # dl-cdn.alpinelinux.org (CDN global)" },
+          { type: "cmd", text: "1  # dl-cdn.alpinelinux.org (CDN global)" },
           {
             type: "out",
             text:
@@ -151,10 +151,10 @@ https://dl-cdn.alpinelinux.org/alpine/v3.24/community`}
       <Terminal
         title="Criando um usuário normal"
         lines={[
-          { type: "in", text: "adduser wallyson" },
+          { type: "cmd", text: "adduser wallyson" },
           { type: "out", text: "Changing password for wallyson" },
-          { type: "in", text: "New password: ********" },
-          { type: "in", text: "Retype password: ********" },
+          { type: "cmd", text: "New password: ********" },
+          { type: "cmd", text: "Retype password: ********" },
           { type: "out", text: "passwd: password for wallyson changed by root" },
           { type: "ok", text: "# pronto! Home /home/wallyson criado." },
         ]}
@@ -290,7 +290,7 @@ rc-service sshd status
       <Terminal
         title="Conectando via SSH"
         lines={[
-          { type: "in", text: "ssh wallyson@192.168.1.100" },
+          { type: "cmd", text: "ssh wallyson@192.168.1.100" },
           {
             type: "out",
             text:
@@ -298,8 +298,8 @@ rc-service sshd status
           },
           { type: "out", text: "ED25519 key fingerprint is SHA256:..." },
           { type: "out", text: "Are you sure you want to continue connecting?" },
-          { type: "in", text: "yes" },
-          { type: "in", text: "wallyson@192.168.1.100's password: ********" },
+          { type: "cmd", text: "yes" },
+          { type: "cmd", text: "wallyson@192.168.1.100's password: ********" },
           { type: "out", text: "Welcome to Alpine Linux 3.24" },
           { type: "out", text: "alpine-server:~$" },
         ]}
@@ -404,7 +404,7 @@ crontab -e
       <Terminal
         title="Reboot e verificação"
         lines={[
-          { type: "in", text: "reboot" },
+          { type: "cmd", text: "reboot" },
           { type: "out", text: "Connection to 192.168.1.100 closed." },
           { type: "out", text: "" },
           {
@@ -412,14 +412,14 @@ crontab -e
             text: "# ...30 segundos depois, logue novamente...",
           },
           { type: "out", text: "" },
-          { type: "in", text: "ssh wallyson@192.168.1.100" },
+          { type: "cmd", text: "ssh wallyson@192.168.1.100" },
           {
-            type: "in",
+            type: "cmd",
             text:
               "# — funciona? ✓\n# — hostname correto? ✓\n# — apk update funciona? ✓",
           },
           {
-            type: "in",
+            type: "cmd",
             text:
               "rc-status       # sshd, chronyd, crond → tudo 'started'? ✓",
           },

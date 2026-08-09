@@ -33,18 +33,18 @@ export default function Localizacao() {
       <Terminal
         title="Configurando o teclado"
         lines={[
-          { type: "in", text: "setup-keymap" },
+          { type: "cmd", text: "setup-keymap" },
           {
             type: "out",
             text: "Available keyboard layouts:\n  us      US keyboard\n  br      Brazilian (ABNT2)\n  pt      Portuguese\n  de      German\n  fr      French\n  ...",
           },
           { type: "out", text: "Select keyboard layout [us]:" },
-          { type: "in", text: "br" },
+          { type: "cmd", text: "br" },
           {
             type: "out",
             text: "Select variant (press Enter for default):",
           },
-          { type: "in", text: "" },
+          { type: "cmd", text: "" },
           {
             type: "out",
             text: "* Setting keymap to 'br' ...  [OK]",
@@ -95,12 +95,12 @@ loadkeys br-abnt2`}
       <Terminal
         title="Configurando o fuso horário"
         lines={[
-          { type: "in", text: "setup-timezone" },
+          { type: "cmd", text: "setup-timezone" },
           {
             type: "out",
             text: "Which timezone are you in? ('?' for list) [UTC]:",
           },
-          { type: "in", text: "America/Fortaleza" },
+          { type: "cmd", text: "America/Fortaleza" },
           {
             type: "out",
             text:

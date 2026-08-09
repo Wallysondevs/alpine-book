@@ -1,6 +1,7 @@
 import { PageContainer } from "@/components/layout/PageContainer";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { AlertBox } from "@/components/ui/AlertBox";
+import { Terminal } from "@/components/ui/Terminal";
 
 export default function Hardening() {
   return (
